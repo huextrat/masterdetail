@@ -1,0 +1,53 @@
+﻿<Controls:MetroWindow x:Class="MasterDetail.Views.LoginPageView"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:Controls="http://metro.mahapps.com/winfx/xaml/controls"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        xmlns:local="clr-namespace:MasterDetail.Views"
+        mc:Ignorable="d"
+        Icon="/lol.ico"
+        Title="Login" 
+        MinHeight="300"
+        MinWidth="400"
+        Height="300"
+        Width="400"
+        GlowBrush="#DDCC2F"
+        WindowStartupLocation="CenterScreen"        
+        ResizeMode="CanResizeWithGrip"
+        Background="#DDCC2F">
+
+    <Window.Resources>
+        <ResourceDictionary>
+            <SolidColorBrush x:Key="WindowTitleColorBrush" Color="#DDCC2F"/>
+            <ResourceDictionary.MergedDictionaries>
+                <ResourceDictionary Source="pack://application:,,,/MahApps.Metro;component/Styles/Fonts.xaml" />
+                <ResourceDictionary Source="pack://application:,,,/MahApps.Metro;component/Styles/Controls.xaml" />
+                <ResourceDictionary Source="pack://application:,,,/MahApps.Metro;component/Styles/Accents/Blue.xaml" />
+                <ResourceDictionary Source="pack://application:,,,/MahApps.Metro;component/Styles/Accents/BaseLight.xaml" />
+                <ResourceDictionary Source="pack://application:,,,/MahApps.Metro;component/Styles/colors.xaml" />
+            </ResourceDictionary.MergedDictionaries>
+        </ResourceDictionary>
+    </Window.Resources>
+    <Grid>
+        <Grid.RowDefinitions>
+            <RowDefinition Height="Auto" />
+            <RowDefinition />
+            <RowDefinition Height="Auto"></RowDefinition>
+        </Grid.RowDefinitions>
+
+        <Grid.Background>
+            <ImageBrush Stretch="None" ImageSource="/MasterDetail;component/Img/background.png" AlignmentX="Center"/>
+        </Grid.Background>
+
+        <Label Content="Login" Margin="100,26,100,0" VerticalAlignment="Top" HorizontalContentAlignment="Center"/>
+        <Label Content="Login" Margin="100,26,100,0" VerticalAlignment="Top" HorizontalContentAlignment="Center"/>
+        <TextBox x:Name="login" Controls:TextBoxHelper.Watermark="Pseudo" Controls:TextBoxHelper.ClearTextButton="True" MaxLength="16" Text="{Binding Login, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}" Grid.Row="0" HorizontalAlignment="Center" Height="23" TextWrapping="Wrap" VerticalAlignment="Center" Width="180" Margin="100,50,100,195"/>
+        <Label Content="Password" Margin="100,107,100,0" VerticalAlignment="Top" HorizontalContentAlignment="Center"/>
+        <PasswordBox x:Name="pass" Controls:TextBoxHelper.Watermark="Password" Controls:TextBoxHelper.ClearTextButton="True" MaxLength="20" Margin="100,130,100,0" VerticalAlignment="Top" Height="23" Width="180"/>
+        <Rectangle Fill="{Binding Color}" x:Name="PassRect" HorizontalAlignment="Center" Height="5" Margin="100,155,100,0"  VerticalAlignment="Top" Width="180"/>
+        <Rectangle Fill="{Binding Color}" x:Name="LogRect" HorizontalAlignment="Center" Height="5" Margin="100,75,100,0"  VerticalAlignment="Top" Width="180"/>
+        <Button IsDefault="True" BorderThickness="1" Command="{Binding LogUserInCommand}" Content="Log in" HorizontalAlignment="Center" VerticalAlignment="Bottom" Width="194" Margin="50,0,50,50"/>
+    </Grid>
+</Controls:MetroWindow>
+    

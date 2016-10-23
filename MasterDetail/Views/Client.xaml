@@ -1,0 +1,126 @@
+﻿<Controls:MetroWindow x:Class="MasterDetail.Client"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:Controls="http://metro.mahapps.com/winfx/xaml/controls"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        xmlns:mah="clr-namespace:MahApps.Metro.Controls;assembly=MahApps.Metro"
+        xmlns:local="clr-namespace:MasterDetail.Behaviors"
+        mc:Ignorable="d"
+        Icon="/lol.ico"
+        Title="LoL Client" 
+        GlowBrush="#DDCC2F"
+        WindowStartupLocation="CenterScreen"        
+        ResizeMode="NoResize"
+        Background="White"
+        Height="720" Width="1080" Closed="Window_Closed" >
+    <Window.Resources>
+
+        <ResourceDictionary>
+            <SolidColorBrush x:Key="WindowTitleColorBrush" Color="#DDCC2F"/>
+            <ResourceDictionary.MergedDictionaries>
+
+                <ResourceDictionary Source="pack://application:,,,/MahApps.Metro;component/Styles/Fonts.xaml" />
+                <ResourceDictionary Source="pack://application:,,,/MahApps.Metro;component/Styles/Controls.xaml" />
+                <ResourceDictionary Source="pack://application:,,,/MahApps.Metro;component/Styles/Accents/Blue.xaml" />
+                <ResourceDictionary Source="pack://application:,,,/MahApps.Metro;component/Styles/Accents/BaseLight.xaml" />
+                <ResourceDictionary Source="pack://application:,,,/MahApps.Metro;component/Styles/colors.xaml" />
+                <ResourceDictionary Source="pack://application:,,,/MahApps.Metro;component/Styles/Controls.AnimatedTabControl.xaml" />
+            </ResourceDictionary.MergedDictionaries>
+        </ResourceDictionary>
+    </Window.Resources>
+    <Grid>
+
+        <Grid.Resources>
+            <CollectionViewSource x:Key="DescendingChamps" Source="{Binding Champs}" />
+            <CollectionViewSource x:Key="PositionChamps" Source="{Binding Champs}" />
+
+        </Grid.Resources>
+
+        <Grid.ColumnDefinitions>
+            <ColumnDefinition Width="2*" />
+            <ColumnDefinition Width="7*" />
+        </Grid.ColumnDefinitions>
+
+        <Grid.RowDefinitions>
+            <RowDefinition Height="Auto" />
+            <RowDefinition />
+            <RowDefinition Height="Auto">
+            </RowDefinition>
+        </Grid.RowDefinitions>
+
+        <StackPanel x:Name="stackTop" Grid.Row="0" Grid.Column="0" Background="#DDCC2F" Grid.ColumnSpan="2" Visibility="Visible">
+            <TextBlock x:Name="loginText" Text="Pseudo : Hugo" HorizontalAlignment="Right" VerticalAlignment="Top"/>
+            <TextBlock x:Name="seDeco" HorizontalAlignment="Right" VerticalAlignment="Top">
+                <Hyperlink  Foreground="black" Command="{Binding Deco}">Se déconnecter </Hyperlink>
+            </TextBlock>
+
+        </StackPanel>
+        <Grid x:Name="titleTop" Visibility="Visible">
+            <TextBlock Text="League of Legends" Foreground="Black" FontSize="20" FontWeight="Bold" FontFamily="SimSun" Margin="471,25,-408,0" />
+        </Grid>
+
+        <Grid Name="stackList" Grid.Row="1">
+            <ListBox ItemsSource="{Binding Champs}" SelectedItem="{Binding SelectedChamp, Mode=TwoWay}" Background="Transparent" ScrollViewer.VerticalScrollBarVisibility="Hidden" FontSize="18" FontFamily="Kartika" HorizontalContentAlignment="Center" HorizontalAlignment="Center" Width="239" FontWeight="Bold" Foreground="#897e18" Grid.RowSpan="2">
+                <ListBox.ItemTemplate>
+                    <DataTemplate>
+                        <StackPanel>
+                            <ListBoxItem Content="{Binding Name}" Margin="0,5,0,0" Focusable="False" IsHitTestVisible="False" IsTabStop="True"/>
+                            <Image Source="{Binding IconChamp}"/>
+                        </StackPanel>
+                    </DataTemplate>
+                </ListBox.ItemTemplate>
+            </ListBox>
+        </Grid>
+
+        <TabControl x:Name="tabControl" Grid.Column="1" Margin="0" Grid.Row="1" Background="White" Visibility="Visible">
+            <TabItem Header="Champion">
+                <StackPanel x:Name="stackImage" Grid.Column="1" Grid.Row="1" Visibility="Visible">
+                    <Image x:Name="Image" Source="{Binding SelectedChamp.ImageChamp}" Stretch="UniformToFill" Height="592" Margin="40,0,40,0" />
+                </StackPanel>
+            </TabItem>
+            <TabItem Header="Histoire">
+                <StackPanel>
+                    <TextBlock x:Name="Histoire" HorizontalAlignment="Left" Text="{Binding SelectedChamp.HistChamp}" />
+                    <WrapPanel HorizontalAlignment="Center">
+                        <Button Width="55" Height="55" Style="{DynamicResource MetroCircleButtonStyle}" Click="Button_Click_1">
+                            <StackPanel>
+                                <Image Height="35" Source="/MasterDetail;component/Img/Play.png" />
+                            </StackPanel>
+                        </Button>
+                        <Button Width="55" Height="55" Style="{DynamicResource MetroCircleButtonStyle}" Click="Button_Click_2">
+                            <StackPanel>
+                                <Image Height="35" Source="/MasterDetail;component/Img/Pause.png" />
+                            </StackPanel>
+                        </Button>
+                    </WrapPanel>
+                    <MediaElement x:Name="mediaMusic" Source="{Binding SelectedChamp.MusicChamp}" LoadedBehavior="Manual"/>
+                </StackPanel>
+            </TabItem>
+            <TabItem Header="Vidéo">
+                <WebBrowser local:WebBrowserBehavior.BindableSource="{Binding SelectedChamp.VideoChamp}" x:Name="Web"/>
+            </TabItem>
+            <TabItem Header="Mon Profil" Margin="385,0,-384,0">
+                <StackPanel>
+
+                    <StackPanel x:Name="stackProfil">
+                        <mah:Tile Title="Mon Profil" Click="Tile_Click_1"  Background="Teal" HorizontalAlignment="Left"/>
+                        <mah:Tile Title="GitHub" Click="Tile_Click_2"  Background="LightBlue" HorizontalAlignment="Left"/>
+                    </StackPanel>
+
+                    <StackPanel x:Name="stackMonGitHub" Margin="150,-285,10,0" Visibility="Hidden" Height="580">
+                        <WebBrowser Source="https://github.com/huextrat" Height="580"/>
+                    </StackPanel>
+
+                    <StackPanel x:Name="stackMonProfil" Margin="100,-550,-200,0" Visibility="Hidden">
+                        <Label HorizontalAlignment="Center" Margin="200,10,400,0" FontSize="24" Content="Mon Profil" />
+                        <TextBlock HorizontalAlignment="Center" Margin="200,10,400,0" x:Name="profilPseudo1" Text="Pseudo : "/>
+                        <Label HorizontalAlignment="Center" Margin="200,10,400,0" Content="Age : 18"/>
+                        <Label HorizontalAlignment="Center" Margin="200,10,400,0" Content="Email : extrat.h@gmail.com"/>
+                        <Label HorizontalAlignment="Center" Margin="200,10,400,0" Content="Sexe : Homme"/>
+                    </StackPanel>
+                </StackPanel>
+            </TabItem>
+        </TabControl>
+    </Grid>
+</Controls:MetroWindow>
