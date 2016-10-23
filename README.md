@@ -44,4 +44,4 @@ Réalisé en C# avec Visual Studio 2015.
 
 ### L'interface du client
 
-![Preview]((http://i.imgur.com/JtmE7Pw.png))
+![Preview](http://i.imgur.com/JtmE7Pw.png)
