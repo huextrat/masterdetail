@@ -40,8 +40,8 @@ Réalisé en C# avec Visual Studio 2015.
 
 ### L'inteface Login
 
-![Preview](http://imgur.com/CgJTkyL)
+![Preview](http://i.imgur.com/CgJTkyL.png)
 
 ### L'interface du client
 
-![Preview](http://imgur.com/JtmE7Pw)
+![Preview]((http://i.imgur.com/JtmE7Pw.png))
